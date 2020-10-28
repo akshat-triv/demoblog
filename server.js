@@ -34,6 +34,13 @@ const server = app.listen(port, () => {
   console.log(`Server running on port : ${port}`);
 });
 
+process.on('SIGTERM', () => {
+  console.log('SIGTERM recieved');
+  server.close(() => {
+    console.log('process terminated');
+  });
+});
+
 process.on('unhandledRejection', (err) => {
   console.log('Unhandeled Rejection Shutting down the server');
   console.log(`${err.name}:${err.message}`);

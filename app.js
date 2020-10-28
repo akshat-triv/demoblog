@@ -5,6 +5,7 @@ const xss = require('xss-clean');
 const sanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const cors = require('cors');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 
@@ -21,7 +22,8 @@ app.use(helmet());
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(cors());
+app.options('*', cors());
+app.use(compression());
 
 //For logging hte requests to the console
 if (process.env.NODE_ENV === 'development') {
