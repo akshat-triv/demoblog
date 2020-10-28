@@ -1,0 +1,65 @@
+extends base
+
+mixin story(article)
+    .story
+        a(href=`/article/${article.slug}`)
+            picture.story__cover
+                img.story__cover-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)
+            .story__title
+                | #{article.titleLimited}
+                -var pubOn = article.publishedOn.toString();
+                -var date = pubOn.split(' ').slice(1,4).join('/');
+                span.story__details= `Published on ${date}`
+
+block content
+    main(data-article=`${article.id}` id='main')
+        .row
+            h1
+                | #{article.title}
+            .share
+                span Share on
+                .share__icons
+                    a#facebook.share__link(href='#')
+                        svg.share__icon
+                            use(xlink:href='/svg/sprite.svg#icon-facebook-with-circle')
+                    a#linkedin.share__link(href='#')
+                        svg.share__icon
+                            use(xlink:href='/svg/sprite.svg#icon-linkedin-with-circle')
+                    a#twitter.share__link(href='#')
+                        svg.share__icon
+                            use(xlink:href='/svg/sprite.svg#icon-twitter-with-circle')
+        .row
+            section.wall
+                .wall__features
+                    block style
+                        h1 I'm a placeholder
+                .wall__subs-article
+                    .wall__subs-article__stories
+                        each article,i in related
+                            +story(article)
+                    .wall__subs-article__like
+                        p.paragraph Give a thumbs up, if you liked the article.
+                        .like
+                            a#liked.like-1(href='#')
+                                svg.like__icon.li
+                                    use(xlink:href='/svg/sprite.svg#icon-thumbs-up')
+                                .like__counter(id='counterLike' data-count=article.likes)
+                            a#disliked.like-2(href='#')
+                                svg.like__icon.di
+                                    use(xlink:href='/svg/sprite.svg#icon-thumbs-down')
+                                .like__counter(id='counterDislike' data-count=article.dislikes)
+        .row
+            section.comments
+                form#comments__add.comments__add(action='#')
+                    span Add a comment
+                    input#name.name(type='text' name='name' placeholder='Name' required)
+                    textarea#comment.comment(form='comments__add' name='comment' placeholder='Comment' style='margin-bottom: 1rem;' required)
+                    button.submit-btn(type='submit') submit
+                .comments__present
+                    span(id='commentsAfter') Comments
+                    if article.comments[0]
+                        each comm,i in article.comments
+                            p.person=comm.name
+                            p.message=comm.comment
+                    else
+                        p.message.nocomm No comments yet               

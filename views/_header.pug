@@ -1,0 +1,15 @@
+header.header
+  h3.header__icon
+    a(href='/')
+      | akshat trivedi
+  form.search(action='#')
+    input.search__bar(type='text' placeholder='search..' value=`${searchVal ? searchVal: ''}`)
+    button.search__button
+      svg.search__icon
+        use(xlink:href='/svg/sprite.svg#icon-magnifying-glass')
+  .navigation
+    a.navigation__item(href='/' class=`${page==='home'?'navigation__item--active':''}`) Home
+    a.navigation__item(href='/html&css' class=`${page==='html&css'?'navigation__item--active':''}`) HTML &amp; CSS
+    a.navigation__item(href='/javascript' class=`${page==='javascript'?'navigation__item--active':''}`) JavaScript
+    a.navigation__item(href='/nodejs' class=`${page==='nodejs'?'navigation__item--active':''}`) Node js
+    a.navigation__item(href='/mongodb' class=`${page==='mongodb'?'navigation__item--active':''}`) MongoDB

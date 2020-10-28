@@ -1,0 +1,16 @@
+extends article
+
+mixin codes(heading,code,paragraph)
+    if heading
+        h4 #{heading}
+    if code
+        p.code=`${code}`
+    if paragraph    
+        p.paragraph #{paragraph}
+
+block style
+    each con,i in article.content
+        +codes(con.heading,con.image,con.paragraph)
+    if article.demoLink
+        button.submit-btn(href=`${article.demoLink}`) Output demo
+    +codes(undefined,undefined,article.introduction)

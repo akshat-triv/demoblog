@@ -1,0 +1,21 @@
+{
+  "design": 2,
+  "content": [
+    {
+      "heading": "Heading-1",
+      "image": "<!DOCtype html>%*%<html>%*%&nbsp;&nbsp;<head>%*%&nbsp;&nbsp;&nbsp;&nbsp;<title>Image Slide</title>%*%&nbsp;&nbsp;</head>%*%&nbsp;&nbsp;<body>%*%&nbsp;&nbsp;</body>%*%</html>"
+    },
+    {
+      "heading": "Heading-2",
+      "image": "#id{%*%&nbsp;&nbsp;background-color:#000;%*%&nbsp;&nbsp;color:red;%*%}"
+    }
+  ],
+  "likes": 3,
+  "dislikes": 1,
+  "title": "Final test for article type 2",
+  "category": "html&css",
+  "introduction": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta similique ipsam veritatis iusto, velit repudiandae quas cum deleniti",
+  "coverImage": "testImage",
+  "__v": 0,
+  "comments": []
+}

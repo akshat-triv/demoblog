@@ -1,0 +1,23 @@
+doctype html
+head
+    title Akshat Trivedi&apos;s Blog | #{title}
+    include _head
+    if article
+        meta(property='og:url' content=`www.akshattrivedi.cf/article/${article.slug}`)
+        meta(property='og:type' content='website')
+        meta(property='og:title' content=`${title}`)
+        meta(property='og:description' content=`${article.introduction}`)
+        meta(property='og:image' content=`/images/${article.coverImage}.jpg`)
+body
+    //header
+    include _header
+
+    //content
+    block content
+        h1 This is a placeholder
+
+    //footer
+    include _footer
+
+    script(src="/js/bundle.js")
+    

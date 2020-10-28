@@ -1,0 +1,74 @@
+extends base
+
+mixin story(article,main)
+    .story
+        a(href=`/article/${article.slug}`)
+            picture.story__cover
+                img.story__cover-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)
+            .story__title=`${main?article.title:article.titleLimited}`
+                -var pubOn = article.publishedOn.toString();
+                -var date = pubOn.split(' ').slice(1,4).join('/');
+                span.story__details= `Published on ${date}`
+
+mixin main-story(articles)
+    .row
+        .main-story
+            .main-story__feature
+                if articles[0]
+                    +story(articles[0],true)
+            .main-story__subs
+                if articles[1]
+                    +story(articles[1])
+                if articles[2]          
+                    +story(articles[2])
+
+mixin features(articles)
+    section.features
+        h2 Don&apos;t miss out on the good ones
+        .row
+            each article,i in articles
+                if article
+                    +story(article)
+
+mixin wall(articles)
+    .row
+        section.wall
+            .wall__features
+                .grids
+                    if articles[0]
+                        +story(articles[0])
+                    if articles[1]    
+                        +story(articles[1])
+                    if articles[2]
+                        +story(articles[2])
+                    if articles[3]
+                        +story(articles[3])
+                    if articles[4]
+                        +story(articles[4])
+                    if articles[5]
+                        +story(articles[5])
+                    if articles[6]
+                        +story(articles[6])
+                    if articles[7]
+                        +story(articles[7])
+            .wall__subs
+                if articles[8]
+                    +story(articles[8])
+                if articles[9]
+                    +story(articles[9])
+                if articles[10]
+                    +story(articles[10])
+                if articles[11]
+                    +story(articles[11])
+
+block content
+    main
+        +main-story(articles.slice(0,3))
+        -var numberOfArticles = articles.length;
+        -var loops = Math.ceil(numberOfArticles / 18);
+        -for(var i=1;i<=loops;i++){
+        if articles[`${3*i}`]   
+            +features(articles.slice(3,6))
+        if articles[`${6*i}`]    
+            +wall(articles.slice(6,18))
+        -}

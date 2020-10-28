@@ -1,0 +1,15 @@
+extends article
+
+mixin para(paragraph,image,heading)
+    if heading
+        h4 #{heading}
+    if paragraph    
+        p.paragraph #{paragraph}
+    if image   
+        img.article-image(src=`/images/${image}.jpg` alt=`${image}`)
+
+block style
+    p.paragraph #{article.introduction}
+    img.article-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)
+    each con,i in article.content
+        +para(con.paragraph,con.image,con.heading)
