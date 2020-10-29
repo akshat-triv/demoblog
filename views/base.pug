@@ -8,6 +8,12 @@ head
         meta(property='og:title' content=`${title}`)
         meta(property='og:description' content=`${article.introduction}`)
         meta(property='og:image' content=`/images/${article.coverImage}.jpg`)
+    else
+        meta(property='og:url' content=`https://akshattrivedi.herokuapp.com/`)
+        meta(property='og:type' content='website')
+        meta(property='og:title' content=`Akhsat Trivedi's blog`)
+        meta(property='og:description' content='A website which provides information on web development')
+        meta(property='og:image' content=`/images/banner.jpg`)
 body
     //header
     include _header
