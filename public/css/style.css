@@ -116,7 +116,7 @@ h1 {
 }
 @media only screen and (max-width: 37.5em) {
   h1 {
-    font-size: 3.5rem;
+    font-size: 3.7rem;
   }
 }
 .paragraph {
@@ -251,6 +251,26 @@ h1 {
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 10000;
   animation: alerts 1s ease-in-out;
+}
+
+.icons {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .icons {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+  }
+
+  .share span {
+    font-size: 1.8rem !important;
+  }
+
+  .like__counter {
+    font-size: 1.6rem !important;
+  }
 }
 
 .alert--success {

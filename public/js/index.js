@@ -130,7 +130,7 @@ if (likeBox) {
       el.classList.toggle('li--active');
       if (Array.from(el.classList).includes('li--active')) {
         if (
-          Array.from(document.querySelector('.li').classList).includes(
+          Array.from(document.querySelector('.di').classList).includes(
             'li--active'
           )
         ) {

@@ -22,15 +22,15 @@ block content
                     a#facebook.share__link(href=`
 https://www.facebook.com/sharer.php?u=https://akshattrivedi.herokuapp.com/article/${article.slug}
 ` target="__blank")
-                        svg.share__icon
+                        svg.icons.share__icon
                             use(xlink:href='/svg/sprite.svg#icon-facebook-with-circle')
                     a#linkedin.share__link(href=`https://www.linkedin.com/shareArticle?url=https://akshattrivedi.herokuapp.com/article/${article.slug}
 ` target="__blank")
-                        svg.share__icon
+                        svg.icons.share__icon
                             use(xlink:href='/svg/sprite.svg#icon-linkedin-with-circle')
                     a#twitter.share__link(href=`https://twitter.com/share?url=https://akshattrivedi.herokuapp.com/article/${article.slug}&text=See this
 ` target="__blank")
-                        svg.share__icon
+                        svg.icons.share__icon
                             use(xlink:href='/svg/sprite.svg#icon-twitter-with-circle')
         .row
             section.wall
@@ -45,11 +45,11 @@ https://www.facebook.com/sharer.php?u=https://akshattrivedi.herokuapp.com/articl
                         p.paragraph Give a thumbs up, if you liked the article.
                         .like
                             a#liked.like-1(href='#')
-                                svg.like__icon.li
+                                svg.icons.like__icon.li
                                     use(xlink:href='/svg/sprite.svg#icon-thumbs-up')
                                 .like__counter(id='counterLike' data-count=article.likes)
                             a#disliked.like-2(href='#')
-                                svg.like__icon.di
+                                svg.icons.like__icon.di
                                     use(xlink:href='/svg/sprite.svg#icon-thumbs-down')
                                 .like__counter(id='counterDislike' data-count=article.dislikes)
         .row
