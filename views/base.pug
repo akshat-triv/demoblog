@@ -1,5 +1,13 @@
 doctype html
 head
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-BJZEDDSMWL')
+    script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BJZEDDSMWL');
+
     title Akshat Trivedi&apos;s Blog | #{title}
     include _head
     if article
