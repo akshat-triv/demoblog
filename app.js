@@ -16,7 +16,7 @@ const globalErrorController = require('./controllers/errorController');
 
 const app = express();
 
-app.use(helmet());
+//app.use(helmet());
 
 //Setting up view engine
 app.set('view engine', 'pug');
