@@ -43,10 +43,12 @@ const arcticleSchema = new mongoose.Schema(
     likes: {
       type: Number,
       default: 0,
+      min: [0, "Something's not right"],
     },
     dislikes: {
       type: Number,
       default: 0,
+      min: [0, "Something's not right"],
     },
     slug: String,
   },

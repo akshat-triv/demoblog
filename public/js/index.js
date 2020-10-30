@@ -60,7 +60,7 @@ async function updateLike(which, what) {
       url: `/api/v1/article/${articleId}`,
     });
   } catch (err) {
-    sendAlert('fail', `${err}`);
+    return sendAlert('fail', `${err.response.data.message}`);
   }
   if (res) curr = res.data.data.article[which];
   let obj = {};
@@ -73,7 +73,7 @@ async function updateLike(which, what) {
       data: obj,
     });
   } catch (err) {
-    sendAlert('fail', `${err}`);
+    sendAlert('fail', `${err.response.data.message}`);
   }
 
   updated = res.data.data.article[which];
@@ -115,7 +115,7 @@ async function sendComment(person) {
       },
     });
   } catch (err) {
-    sendAlert('fail', `${err}`);
+    sendAlert('fail', `${err.response.data.message}`);
   }
 }
 
@@ -147,9 +147,9 @@ if (likeBox) {
             'li--active'
           )
         ) {
-          document.querySelector('.di').classList.remove('li--active');
           updated = await updateLike('dislikes', -1);
           likeFormattor(updated, 'dislikes');
+          document.querySelector('.di').classList.remove('li--active');
         }
         updated = await updateLike('likes', 1);
         likeFormattor(updated, 'likes');
@@ -167,9 +167,9 @@ if (likeBox) {
             'li--active'
           )
         ) {
-          document.querySelector('.li').classList.remove('li--active');
           updated = await updateLike('likes', -1);
           likeFormattor(updated, 'likes');
+          document.querySelector('.li').classList.remove('li--active');
         }
         updated = await updateLike('dislikes', 1);
         likeFormattor(updated, 'dislikes');

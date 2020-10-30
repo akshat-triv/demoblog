@@ -1,8 +1,14 @@
 const mongoose = require('mongoose');
 
 const commnetSchema = new mongoose.Schema({
-  name: String,
-  comment: String,
+  name: {
+    type: String,
+    required: [true, "What you don't have a name"],
+  },
+  comment: {
+    type: String,
+    required: [true, "Hey, you can't comment nothing!"],
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

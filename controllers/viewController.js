@@ -7,6 +7,11 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   let query = {};
   let page = 'home';
   if (req.params.w) {
+    if (
+      !['html&css', 'javascript', 'nodejs', 'mongodb'].includes(req.params.w)
+    ) {
+      return next(new AppError(`cannot process ${req.originalUrl}`, 404));
+    }
     query = { category: req.params.w };
     page = req.params.w;
   }
@@ -59,6 +64,11 @@ exports.getArticle = catchAsync(async (req, res, next) => {
       sort: '-createdAt name',
     },
   });
+
+  if (!article) {
+    return next(new AppError('No such article exists', 404));
+  }
+
   let related = await getRelated(article.title);
 
   const index = related.findIndex(

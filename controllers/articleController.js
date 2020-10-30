@@ -82,6 +82,12 @@ exports.searchArticles = catchAsync(async (req, res, next) => {
     { score: { $meta: 'textScore' } }
   ).sort({ score: { $meta: 'textScore' } });
 
+  if (!articles) {
+    return res
+      .status(404)
+      .json({ status: 'fail', message: 'no matching articles' });
+  }
+
   res.status(201).json({ status: 'success', data: { articles } });
 });
 
@@ -117,7 +123,9 @@ exports.getPost = catchAsync(async (req, res, next) => {
   );
 
   if (!article) {
-    return next(new AppError('No such article exists', 404));
+    return res
+      .status(404)
+      .json({ status: 'fail', message: 'No such article exists' });
   }
 
   res.status(200).json({ status: 'success', data: { article } });
@@ -134,7 +142,9 @@ exports.updatePost = catchAsync(async (req, res, next) => {
   );
 
   if (!article) {
-    return next(new AppError('No such article exists', 404));
+    return res
+      .status(404)
+      .json({ status: 'fail', message: 'No such article present' });
   }
 
   res.status(200).json({ status: 'success', data: { article } });
@@ -144,7 +154,9 @@ exports.deletePost = catchAsync(async (req, res, next) => {
   const article = await Article.findByIdAndDelete(req.params.articleId);
 
   if (!article) {
-    return next(new AppError('No such article exists', 404));
+    return res
+      .status(404)
+      .json({ status: 'fail', message: 'No such article present' });
   }
 
   await Comment.deleteMany({ articleId: req.params.articleId });
