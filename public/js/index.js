@@ -42,9 +42,9 @@ window.addEventListener('load', function () {
     Array.from(paragraphs).forEach((para) => {
       let text = para.textContent;
       //console.log(text);
-      text = text.replace(/ *\$[^)]*\$ */g, (match) => {
+      text = text.replace(/ *\{[^)]*\} */g, (match) => {
         let l = match.length - 2;
-        return `<span> ${match.slice(2, l)} </span>`;
+        return `<span> ${match.slice(1, l)} </span>`;
       });
       para.innerHTML = text;
       //console.log(text);
