@@ -45,7 +45,8 @@ function formatToSchema(req) {
     if (
       key.startsWith('image') ||
       key.startsWith('paragraph') ||
-      key.startsWith('heading')
+      key.startsWith('heading') ||
+      key.startsWith('subHeading')
     ) {
       let number = key.split('-')[1] * 1;
       if (articleObj.content[number - 1]) {

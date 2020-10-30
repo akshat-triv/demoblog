@@ -13,6 +13,7 @@ let articleId = document.getElementById('main');
 const codeBlock = document.querySelectorAll('.code');
 const likeIcon = document.querySelector('.li');
 const dislikeIcon = document.querySelector('.di');
+const paragraphs = document.querySelectorAll('.paragraph');
 
 function sendSearch(query) {
   location.assign(`/search/${query}`, true);
@@ -35,6 +36,18 @@ window.addEventListener('load', function () {
       let code = cdB.textContent;
       code = code.split('%*%').join('<br>');
       cdB.innerHTML = code;
+    });
+  }
+  if (paragraphs) {
+    Array.from(paragraphs).forEach((para) => {
+      let text = para.textContent;
+      //console.log(text);
+      text = text.replace(/ *\$[^)]*\$ */g, (match) => {
+        let l = match.length - 2;
+        return `<span> ${match.slice(2, l)} </span>`;
+      });
+      para.innerHTML = text;
+      //console.log(text);
     });
   }
 });

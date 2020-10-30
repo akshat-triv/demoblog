@@ -78,7 +78,8 @@ h2 {
 section {
   margin-bottom: 6rem !important;
 }
-h4 {
+h4,
+h5 {
   text-transform: uppercase;
   font-weight: 700;
   width: 100%;
@@ -91,9 +92,19 @@ h4 {
   -webkit-background-clip: text;
   margin-bottom: 1rem;
 }
+
+h5 {
+  font-size: 2.5rem;
+  letter-spacing: 0.1rem;
+  word-spacing: 0.2rem;
+}
+
 @media only screen and (max-width: 37.5em) {
   h4 {
-    font-size: 2.7rem;
+    font-size: 2.6rem;
+  }
+  h5 {
+    font-size: 2.2rem;
   }
 }
 h1 {
@@ -126,6 +137,12 @@ h1 {
   line-height: 2.5rem;
   margin-bottom: 2rem;
 }
+
+.paragraph span {
+  font-weight: 600;
+  color: #111;
+}
+
 @media only screen and (max-width: 56.25em) {
   .paragraph {
     font-size: 2.5rem;

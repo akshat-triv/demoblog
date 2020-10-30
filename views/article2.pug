@@ -1,8 +1,10 @@
 extends article
 
-mixin codes(heading,code,paragraph)
+mixin codes(heading,code,paragraph,subHeading)
     if heading
         h4 #{heading}
+    if subHeading
+        h5 #{subHeading}
     if code
         p.code=`${code}`
     if paragraph    
@@ -10,7 +12,7 @@ mixin codes(heading,code,paragraph)
 
 block style
     each con,i in article.content
-        +codes(con.heading,con.image,con.paragraph)
+        +codes(con.heading,con.image,con.paragraph,con.subHeading)
     if article.demoLink
         button.submit-btn(href=`${article.demoLink}`) Output demo
     +codes(undefined,undefined,article.introduction)

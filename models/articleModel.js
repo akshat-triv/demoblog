@@ -31,6 +31,7 @@ const arcticleSchema = new mongoose.Schema(
       {
         type: mongoose.Mixed,
         heading: String,
+        subHeading: String,
         image: String,
         paragraph: String,
       },

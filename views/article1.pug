@@ -1,8 +1,10 @@
 extends article
 
-mixin para(paragraph,image,heading)
+mixin para(paragraph,image,heading,subHeading)
     if heading
         h4 #{heading}
+    if subHeading
+        h5 #{subHeading}    
     if paragraph    
         p.paragraph #{paragraph}
     if image   
@@ -12,4 +14,4 @@ block style
     p.paragraph #{article.introduction}
     img.article-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)
     each con,i in article.content
-        +para(con.paragraph,con.image,con.heading)
+        +para(con.paragraph,con.image,con.heading,con.subHeading)
