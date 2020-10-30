@@ -25,11 +25,20 @@ exports.resizePhotos = catchAsync(async (req, res, next) => {
   await Promise.all(
     req.files.map(async (image, i) => {
       const imageName = `${req.body.title}-${image.fieldname}`;
-      await sharp(image.buffer)
-        .resize(720, 405)
-        .toFormat('jpeg')
-        .jpeg({ quality: 90 })
-        .toFile(`public/images/${imageName}.jpg`);
+      //console.log(image.fieldname);
+      if (image.fieldname === 'coverImage') {
+        await sharp(image.buffer)
+          .resize(720, 405)
+          .toFormat('jpeg')
+          .jpeg({ quality: 90 })
+          .toFile(`public/images/${imageName}.jpg`);
+      } else {
+        await sharp(image.buffer)
+          .toFormat('jpeg')
+          .jpeg({ quality: 90 })
+          .toFile(`public/images/${imageName}.jpg`);
+      }
+
       req.body[image.fieldname] = imageName;
     })
   );

@@ -90,7 +90,7 @@ h5 {
   background-image: linear-gradient(to right, #111, #444);
   color: transparent;
   -webkit-background-clip: text;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 h5 {
@@ -135,7 +135,7 @@ h1 {
   word-spacing: 2px;
   letter-spacing: 1px;
   line-height: 2.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .paragraph span {
@@ -904,6 +904,5 @@ main {
 }
 .article-image {
   width: 100%;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
