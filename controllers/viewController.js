@@ -19,7 +19,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     .sort('-publishedOn')
     .select('coverImage title titleLimited publishedOn slug');
 
-  if (articles) {
+  if (!articles) {
     return next(new AppError(`Sorry no articles on this topic right now`, 404));
   }
 
