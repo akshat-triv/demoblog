@@ -17,12 +17,13 @@ const globalErrorController = require('./controllers/errorController');
 const app = express();
 
 //app.use(helmet());
+app.use(cors());
+app.options('*', cors());
 
 //Setting up view engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-app.options('*', cors());
 app.use(compression());
 
 //For logging hte requests to the console
@@ -38,7 +39,7 @@ app.use(xss());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', viewRouter);
-app.use('/api/v1/article', articleRouter);
+app.use('/api/v1/article', cors(), articleRouter);
 app.use('/api/v1/comment', commentRouter);
 
 app.all('*', (req, res, next) => {
