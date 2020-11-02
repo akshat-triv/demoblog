@@ -9,9 +9,9 @@ html(lang='en')
             gtag('js', new Date());
             gtag('config', 'G-LGW05JVW38');
 
-        title Akshat Trivedi&apos;s Blog | #{title}
         include _head
         if article
+            title #{title}
             meta(property='og:url' content=`https://akshattrivedi.tk/article/${article.slug}`)
             meta(property='og:type' content='website')
             meta(property='og:title' content=`${title}`)
@@ -19,6 +19,7 @@ html(lang='en')
             meta(property='og:image' content=`https://akshattrivedi.tk/images/${article.coverImage}.jpg`)
             meta(name='description' content=`${article.introduction}`)
         else
+            title Akshat Trivedi&apos;s Blog | #{title}
             meta(property='og:url' content=`https://akshattrivedi.tk/`)
             meta(property='og:type' content='website')
             meta(property='og:title' content=`Akhsat Trivedi's blog`)
