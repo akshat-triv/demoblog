@@ -1,37 +1,40 @@
 doctype html
-head
-    // Global site tag (gtag.js) - Google Analytics
-    script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-LGW05JVW38')
-    script.
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-LGW05JVW38');
+html(lang='en')
+    head
+        // Global site tag (gtag.js) - Google Analytics
+        script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-LGW05JVW38')
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LGW05JVW38');
 
-    title Akshat Trivedi&apos;s Blog | #{title}
-    include _head
-    if article
-        meta(property='og:url' content=`https://akshattrivedi.tk/article/${article.slug}`)
-        meta(property='og:type' content='website')
-        meta(property='og:title' content=`${title}`)
-        meta(property='og:description' content=`${article.introduction}`)
-        meta(property='og:image' content=`https://akshattrivedi.tk/images/${article.coverImage}.jpg`)
-    else
-        meta(property='og:url' content=`https://akshattrivedi.tk/`)
-        meta(property='og:type' content='website')
-        meta(property='og:title' content=`Akhsat Trivedi's blog`)
-        meta(property='og:description' content='A website which provides information on web development')
-        meta(property='og:image' content=`https://akshattrivedi.tk/images/banner.jpg`)
-body
-    //header
-    include _header
+        title Akshat Trivedi&apos;s Blog | #{title}
+        include _head
+        if article
+            meta(property='og:url' content=`https://akshattrivedi.tk/article/${article.slug}`)
+            meta(property='og:type' content='website')
+            meta(property='og:title' content=`${title}`)
+            meta(property='og:description' content=`${article.introduction}`)
+            meta(property='og:image' content=`https://akshattrivedi.tk/images/${article.coverImage}.jpg`)
+            meta(name='description' content=`${article.introduction}`)
+        else
+            meta(property='og:url' content=`https://akshattrivedi.tk/`)
+            meta(property='og:type' content='website')
+            meta(property='og:title' content=`Akhsat Trivedi's blog`)
+            meta(property='og:description' content='A website which provides information on web development')
+            meta(property='og:image' content=`https://akshattrivedi.tk/images/banner.jpg`)
+            meta(name='description' content=`A website which provides information on web development`)
+    body
+        //header
+        include _header
 
-    //content
-    block content
-        h1 This is a placeholder
+        //content
+        block content
+            h1 This is a placeholder
 
-    //footer
-    include _footer
+        //footer
+        include _footer
 
-    script(src="/js/bundle.js")
+        script(src="/js/bundle.js")
     
