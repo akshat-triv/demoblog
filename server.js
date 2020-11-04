@@ -7,7 +7,7 @@ const app = require('./app');
 const DB = process.env.DATABASE.replace(
   '<password>',
   process.env.DB_PASS
-).replace('<dbname>', 'blogtest');
+).replace('<dbname>', 'blog');
 
 mongoose
   .connect(DB, {
