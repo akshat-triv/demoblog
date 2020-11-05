@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.options(
   '*',
   cors({
-    origin: 'akshattrivedi.herokuapp.com/',
+    origin: '*',
     optionsSuccessStatus: 200,
   })
 );
