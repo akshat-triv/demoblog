@@ -24,7 +24,7 @@ exports.uploadPhotos = upload.any();
 exports.resizePhotos = catchAsync(async (req, res, next) => {
   await Promise.all(
     req.files.map(async (image, i) => {
-      const imageName = `${req.body.title}-${image.fieldname}`;
+      const imageName = `${Date.now()}-${image.fieldname}`;
       //console.log(image.fieldname);
       if (image.fieldname === 'coverImage') {
         await sharp(image.buffer)
