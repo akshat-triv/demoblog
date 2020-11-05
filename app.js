@@ -45,7 +45,7 @@ app.options(
 );
 
 app.use('/', viewRouter);
-app.use('/api/v1/article', articleRouter);
+app.use('/api/v1/article', cors(), articleRouter);
 app.use('/api/v1/comment', commentRouter);
 
 app.all('*', (req, res, next) => {
