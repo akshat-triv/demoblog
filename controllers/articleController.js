@@ -66,7 +66,7 @@ function formatToSchema(req) {
       } else {
         let tmp = {};
         tmp[key.split('-')[0]] = req.body[key];
-        articleObj.content.push(tmp);
+        articleObj.content[number - 1] = tmp;
       }
     } else {
       articleObj[key] = req.body[key];
