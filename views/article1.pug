@@ -13,5 +13,28 @@ mixin para(paragraph,image,heading,subHeading)
 block style
     p.paragraph #{article.introduction}
     img.article-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)
+    .overview
+        h4 Overview
+        .overview__box
+            a.overview__item(href='#')
+            | Advance CSS and Sass
+            a.overview__item(href='#')
+            | 1. CSS box model
+            a.overview__item(href='#')
+            | 2. Layouts in CSS
+            a.overview__item(href='#')
+            | 3. Variables in CSS
+            a.overview__item(href='#')
+            | 4. A bunch more stuff
+            a.overview__item(href='#')
+            | JavaScript
+            a.overview__item(href='#')
+            | 1. Starting with the basics of JS
+            a.overview__item(href='#')
+            | 2. ES6/ES2015
+            a.overview__item(href='#')
+            | 3. Advance JavaScript
+            a.overview__item(href='#')
+            | HTML
     each con,i in article.content
         +para(con.paragraph,con.image,con.heading,con.subHeading)

@@ -93,6 +93,43 @@ h5 {
   margin-bottom: 2rem;
 }
 
+.overview {
+  background-color: #fefefe;
+  box-shadow: 0 0.5rem 0.5rem rgba(3, 3, 3, 0.2);
+  padding: 2rem 2rem;
+  margin-bottom: 3rem;
+}
+.overview__box {
+  display: grid;
+  grid-auto-rows: -webkit-max-content;
+  grid-auto-rows: max-content;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  -moz-column-gap: 1rem;
+  column-gap: 1rem;
+  row-gap: 3rem;
+  margin-top: 2rem;
+}
+.overview__item:link,
+.overview__item:visited,
+.overview__item:active,
+.overview__item:hover {
+  text-decoration: none;
+  color: #666;
+  font-size: 1.8rem;
+}
+.overview__item::before {
+  content: '';
+  background-color: var(--Primary-color);
+  -webkit-mask-image: url(./../svg/SVG/chevron-thin-right.svg);
+  -webkit-mask-size: cover;
+  mask-image: url(./../svg/SVG/chevron-thin-right.svg);
+  mask-size: cover;
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
+}
+
 h5 {
   font-size: 2.5rem;
   letter-spacing: 0.1rem;
