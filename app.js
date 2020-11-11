@@ -16,7 +16,13 @@ const globalErrorController = require('./controllers/errorController');
 
 const app = express();
 
+<<<<<<< HEAD
 app.use(helmet({ contentSecurityPolicy: false }));
+=======
+//app.use(helmet());
+app.use(cors());
+app.options('*', cors());
+>>>>>>> testing
 
 //Setting up view engine
 app.set('view engine', 'pug');

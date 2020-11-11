@@ -19,6 +19,13 @@ function sendSearch(query) {
   location.assign(`/search/${query}`, true);
 }
 
+$('.overview__box a').on('click', function () {
+  const id = $(this).attr('href');
+  //console.log(id);
+
+  $('html,body').animate({ scrollTop: $(id).offset().top }, 500);
+});
+
 window.addEventListener('load', function () {
   if (articleId) articleId = articleId.dataset.article;
   if (localStorage.getItem(articleId)) {

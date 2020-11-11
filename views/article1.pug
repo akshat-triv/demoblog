@@ -1,10 +1,16 @@
 extends article
 
-mixin para(paragraph,image,heading,subHeading)
+mixin overview(heading,subHeading,i)
     if heading
-        h4 #{heading}
+        a.overview__item(href=`#h${i}`) #{heading} 
     if subHeading
-        h5 #{subHeading}    
+        a.overview__item(href=`#sh${i}`) #{subHeading}
+
+mixin para(paragraph,image,heading,subHeading,i)
+    if heading
+        h4(id=`h${i}`) #{heading}
+    if subHeading
+        h5(id=`sh${i}`) #{subHeading}    
     if paragraph    
         p.paragraph #{paragraph}
     if image   
@@ -13,5 +19,11 @@ mixin para(paragraph,image,heading,subHeading)
 block style
     p.paragraph #{article.introduction}
     img.article-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)
+    .overview
+        h4 Overview
+        .overview__box
+            each con,i in article.content
+                +overview(con.heading,con.subHeading,i)
+                
     each con,i in article.content
-        +para(con.paragraph,con.image,con.heading,con.subHeading)
+        +para(con.paragraph,con.image,con.heading,con.subHeading,i)
