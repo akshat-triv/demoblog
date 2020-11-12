@@ -18,8 +18,6 @@ const app = express();
 
 app.use(helmet({ contentSecurityPolicy: false }));
 //app.use(helmet());
-app.use(cors());
-app.options('*', cors());
 
 //Setting up view engine
 app.set('view engine', 'pug');
