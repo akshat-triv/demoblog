@@ -6,12 +6,15 @@ const sanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 
 const articleRouter = require('./routes/articleRouter');
 const commentRouter = require('./routes/commentRouter');
 const viewRouter = require('./routes/viewRouter');
+const adminRouter = require('./routes/adminRouter');
+const userRouter = require('./routes/userRouter');
 const globalErrorController = require('./controllers/errorController');
 
 const app = express();
@@ -32,6 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //Body parser
 app.use(express.json());
+app.use(cookieParser());
 app.use(sanitize());
 app.use(xss());
 //Serving static files
@@ -46,6 +50,8 @@ app.options(
 );
 
 app.use('/', viewRouter);
+app.use('/api/v1/admin', adminRouter);
+app.use('/api/v1/user', userRouter);
 app.use('/api/v1/article', cors(), articleRouter);
 app.use('/api/v1/comment', commentRouter);
 

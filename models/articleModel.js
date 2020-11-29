@@ -19,7 +19,6 @@ const arcticleSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ['html&css', 'javascript', 'nodejs', 'mongodb'],
       required: [true, 'An article should have a category'],
     },
     titleLimited: String,
@@ -31,6 +30,7 @@ const arcticleSchema = new mongoose.Schema(
       {
         type: mongoose.Mixed,
         heading: String,
+        code: String,
         subHeading: String,
         image: String,
         paragraph: String,

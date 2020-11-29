@@ -1,0 +1,18 @@
+extends baseEmail
+
+block content
+    p Hi #{firstName},
+        p Welcome to my blog, we're glad to have you in this community 🎉🙏
+        p From now on, you'll recieve updates, anytime I post a new article.
+        p Connect with me on Likedin if you like.
+        table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+                tr
+                    td(align='left')
+                        table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                            tbody
+                                tr
+                                    td
+                                        a(href=`${url}`, target='_blank') LinkedIn
+        p If you ever need any help, than feel free to contact me.
+        p - Akshat Trivedi

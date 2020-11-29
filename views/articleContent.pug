@@ -6,15 +6,17 @@ mixin overview(heading,subHeading,i)
     if subHeading
         a.overview__item(href=`#sh${i}`) #{subHeading}
 
-mixin para(paragraph,image,heading,subHeading,i)
+mixin para(paragraph,image,heading,subHeading,code,i)
     if heading
         h4(id=`h${i}`) #{heading}
     if subHeading
         h5(id=`sh${i}`) #{subHeading}    
     if paragraph    
         p.paragraph #{paragraph}
+    if code
+        p.code #{code}    
     if image   
-        img.article-image(src=`/images/${image}.jpg` alt=`${image}`)
+        img.article-image(src=`/images/${image}.jpg` alt=`${image}`)    
 
 block style
     p.paragraph #{article.introduction}
@@ -26,4 +28,4 @@ block style
                 +overview(con.heading,con.subHeading,i)
                 
     each con,i in article.content
-        +para(con.paragraph,con.image,con.heading,con.subHeading,i)
+        +para(con.paragraph,con.image,con.heading,con.subHeading,con.code,i)

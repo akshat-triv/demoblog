@@ -1,14 +1,20 @@
 extends base
 
-mixin story(article,main)
-    .story
-        a(href=`/article/${article.slug}`)
+mixin story(article,main,demo)
+    .story(id=`${demo?'dummy':' '}`)
+        a(href=`${demo ?'#more-content-coming-soon' :`/article/${article.slug}`}`)
             picture.story__cover
-                img.story__cover-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)
-            .story__title=`${main?article.title:article.titleLimited}`
-                -var pubOn = article.publishedOn.toString();
-                -var date = pubOn.split(' ').slice(1,4).join('/');
-                span.story__details= `Published on ${date}`
+                if demo
+                    img.story__cover-image(src=`${demo===1?'/images/js.jpg':'/images/node.png'}` alt=`${demo===1?'/images/js.jpg':'/images/node.png'}`)
+                else
+                    img.story__cover-image(src=`/images/${article.coverImage}.jpg` alt=`${article.coverImage}`)      
+            if demo
+                .story__title More content coming soon.
+            else
+                .story__title=`${main?article.title:article.titleLimited}`
+                    -var pubOn = article.publishedOn.toString();
+                    -var date = pubOn.split(' ').slice(1,4).join('/');
+                    span.story__details= `Published on ${date}`
 
 mixin main-story(articles)
     .row
@@ -26,9 +32,11 @@ mixin features(articles)
     section.features
         h2 Don&apos;t miss out on the good ones
         .row
-            each article,i in articles
-                if article
-                    +story(article)
+            each i in [0,1,2]
+                if articles[i]
+                    +story(articles[i])
+                else
+                    +story(articles[0],false,i)   
 
 mixin wall(articles)
     .row

@@ -1,9 +1,10 @@
 header.header
+  .loading
   h3.header__icon
     a(href='/')
       | akshat trivedi
   form.search(action='#')
-    input.search__bar(type='text' placeholder='search..' value=`${searchVal ? searchVal: ''}`)
+    input.search__bar(type='search' placeholder='search..' value=`${searchVal ? searchVal: ''}`)
     button.search__button
       svg.search__icon
         use(xlink:href='/svg/sprite.svg#icon-magnifying-glass')

@@ -1,0 +1,26 @@
+extends base
+
+block content
+
+    main.main(style="padding:4rem;")
+        .overview(style="max-width:400px;margin:40px auto;margin-bottom: 200px;")
+            form.form(class=`${title!='Forgot my password' ? title==='Login' ? 'form-login':'form-signup' : 'form-forgot'}`)
+                -if(title==='Signup')
+                    .form__group
+                        label.form__label(for='name') Name
+                        input#name.name(type='text', placeholder='Firstname Lastname', required)
+                .form__group
+                    label.form__label(for='email') Email address
+                    input#email.name(type='email', placeholder='you@example.com', required)
+                -if(title!='Forgot my password')    
+                    .form__group.ma-bt-md
+                        label.form__label(for='password') Password
+                        input#password.name(type='password', placeholder='••••••••', required, minlength='8')
+                -if(title==='Signup')
+                    .form__group.ma-bt-md
+                        label.form__label(for='password') Password confirm
+                        input#passwordConfirm.name(type='password', placeholder='••••••••', required, minlength='8')
+                -if(title==='Login')
+                    a.description__text#forgotPassword(href='/forgotmypassword') Forgot your password ?         
+                .form__group
+                    button.submit-btn(style="margin-top:40px;")=`${title!='Forgot my password' ? title==='Login' ? 'Login':'Signup' : 'Send'}`

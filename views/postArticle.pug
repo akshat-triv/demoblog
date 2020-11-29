@@ -1,0 +1,42 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        title Post the article
+        link(rel='stylesheet' href='/css/Poststyle.css')
+        include _head
+    include _header
+    main
+        .cms
+            .btns
+                button#save.btn Save
+                input#count(type='number' style='margin-right:1rem;' name='count' placeholder='count')
+                button#set.btn set
+                button#clear.btn Clear
+                button#post.btn Post
+            form.article(action='#')
+                input#title.fields(type='text' placeholder='Title' required='')
+                select#category.selects(name='category')
+                    option(value='html&css' selected='') HTML &amp; CSS
+                    option(value='javascript') JavaScript
+                    option(value='nodejs') Node js
+                    option(value='mongodb') MongoDB
+                textarea#introduction.fields__area(name='introduction' placeholder='Introduction')
+                input#coverImage.js--file(type='file' name='coverImage')
+                label.files(for='coverImage') Upload coverImage
+                select#design.selects(name='design')
+                    option(value='1' selected='') Design 1
+                    option(value='2') Design 2
+                #content.btns
+                    button#heading.btn Heading
+                    button#subHeading.btn Sub heading
+                    button#paragraph.btn Paragraph
+                    button#image.btn Image
+                    button#code.btn Code
+        .preview
+            h1#viewtitle Title
+            p#viewintroduction.paragraph Placeholder introduction
+    include _footer
+    script(src='/jquery/dist/jquery.min.js')
+    script(src='/js/Postbundle.js')

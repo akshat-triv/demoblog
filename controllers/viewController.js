@@ -30,6 +30,10 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getPostArticle = catchAsync(async (req, res, next) => {
+  res.status(200).render('postArticle');
+});
+
 async function getRelated(searchString) {
   const articles = await Article.find(
     { $text: { $search: searchString } },
@@ -45,7 +49,7 @@ exports.search = catchAsync(async (req, res, next) => {
   const articles = await Article.find(
     { $text: { $search: req.params.searchQuery } },
     { score: { $meta: 'textScore' } }
-  ).sort({ score: { $meta: 'textScore' } });
+  ).sort({ score: { $meta: 'textScore' }, publishedOn: -1 });
 
   if (!articles[0]) {
     return next(new AppError('No matching articles', 404));
@@ -58,6 +62,12 @@ exports.search = catchAsync(async (req, res, next) => {
     searchVal: req.params.searchQuery,
   });
 });
+
+exports.getLogin = (req, res, next) => {
+  res.status(200).render('login', {
+    title: 'Login',
+  });
+};
 
 exports.getArticle = catchAsync(async (req, res, next) => {
   const article = await Article.findOne({
@@ -83,7 +93,7 @@ exports.getArticle = catchAsync(async (req, res, next) => {
 
   //console.log(related);
 
-  res.render(`article${article.design}`, {
+  res.render(`articleContent`, {
     article,
     title: article.titleLimited,
     related,

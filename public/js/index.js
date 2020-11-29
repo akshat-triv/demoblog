@@ -14,6 +14,8 @@ const codeBlock = document.querySelectorAll('.code');
 const likeIcon = document.querySelector('.li');
 const dislikeIcon = document.querySelector('.di');
 const paragraphs = document.querySelectorAll('.paragraph');
+const notify = document.getElementById('notify');
+const loginForm = document.querySelector('.form-login');
 
 function sendSearch(query) {
   location.assign(`/search/${query}`, true);
@@ -98,8 +100,10 @@ function likeFormattor(number, which) {
   }
   if (which === 'likes') {
     counterLike.textContent = newNumber;
+    counterLike.dataset.count = `${newNumber}`;
   } else {
     counterDislike.textContent = newNumber;
+    counterDislike.dataset.count = `${newNumber}`;
   }
 }
 
@@ -108,11 +112,15 @@ async function sendComment(person) {
     'afterend',
     `<p class='person'>${person.name}</p><p class='message'>${person.message}</p>`
   );
+  let res;
+
+  document.getElementById('name').value = '';
+  document.getElementById('comment').value = '';
 
   if (nocomments) nocomments.parentNode.removeChild(nocomments);
 
   try {
-    await axios({
+    res = await axios({
       method: 'POST',
       url: `/api/v1/comment`,
       data: {
@@ -120,7 +128,25 @@ async function sendComment(person) {
         name: person.name,
         comment: person.message,
       },
+      onUploadProgress: function (progressEvent) {
+        let loaded = Math.floor(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        loaded -= 10;
+        document.querySelector('.loading').style.width = `${loaded}%`;
+      },
     });
+    if (res) {
+      document.querySelector('.loading').style.width = `100%`;
+      setTimeout(() => {
+        document.querySelector('.loading').style.opacity = '0';
+      }, 2000);
+      setTimeout(() => {
+        document.querySelector('.loading').style.width = `0%`;
+        document.querySelector('.loading').style.opacity = '1';
+      }, 100);
+      sendAlert('success', 'Your comment was added successfully');
+    }
   } catch (err) {
     sendAlert('fail', `${err.response.data.message}`);
   }
@@ -141,51 +167,156 @@ if (commentForm) {
   });
 }
 
+if (notify) {
+  notify.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    let res;
+    const name = document.getElementById('notify-name').value;
+    const email = document.getElementById('notify-email').value;
+    try {
+      res = await axios({
+        url: '/api/v1/user/',
+        method: 'post',
+        data: {
+          name,
+          email,
+        },
+        onUploadProgress: function (progressEvent) {
+          let loaded = Math.floor(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          loaded -= 10;
+          document.querySelector('.loading').style.width = `${loaded}%`;
+        },
+      });
+      if (res) {
+        document.querySelector('.loading').style.width = `100%`;
+        setTimeout(() => {
+          document.querySelector('.loading').style.opacity = '0';
+        }, 1000);
+        setTimeout(() => {
+          document.querySelector('.loading').style.width = `0%`;
+          document.querySelector('.loading').style.opacity = '1';
+        }, 100);
+        document.getElementById('notify-name').value = '';
+        document.getElementById('notify-email').value = '';
+        sendAlert('success', 'Thanks for subsribing to my blog');
+      }
+    } catch (err) {
+      document.querySelector('.loading').style.width = `100%`;
+      setTimeout(() => {
+        document.querySelector('.loading').style.opacity = '0';
+      }, 1000);
+      setTimeout(() => {
+        document.querySelector('.loading').style.width = `0%`;
+        document.querySelector('.loading').style.opacity = '1';
+      }, 100);
+      sendAlert('fail', `${err.response.data.message}`);
+    }
+  });
+}
+
 if (likeBox) {
   likeBox.addEventListener('click', async function (e) {
     let updated;
     e.preventDefault();
-    let el = e.target.closest('svg');
-    if (Array.from(el.classList).includes('li')) {
+    let el = e.target.closest('a');
+    if (el && Array.from(el.classList).includes('li')) {
       el.classList.toggle('li--active');
       if (Array.from(el.classList).includes('li--active')) {
+        updated = counterLike.dataset.count * 1 + 1;
+        likeFormattor(updated, 'likes');
+        localStorage.setItem(articleId, 'liked');
         if (
           Array.from(document.querySelector('.di').classList).includes(
             'li--active'
           )
         ) {
-          updated = await updateLike('dislikes', -1);
+          updated = counterDislike.dataset.count * 1 - 1;
           likeFormattor(updated, 'dislikes');
           document.querySelector('.di').classList.remove('li--active');
+          updated = await updateLike('dislikes', -1);
         }
         updated = await updateLike('likes', 1);
-        likeFormattor(updated, 'likes');
-        localStorage.setItem(articleId, 'liked');
       } else {
-        updated = await updateLike('likes', -1);
+        updated = counterLike.dataset.count * 1 - 1;
         likeFormattor(updated, 'likes');
         localStorage.removeItem(articleId);
+        updated = await updateLike('likes', -1);
       }
     } else if (Array.from(el.classList).includes('di')) {
       el.classList.toggle('li--active');
       if (Array.from(el.classList).includes('li--active')) {
+        updated = counterDislike.dataset.count * 1 + 1;
+        likeFormattor(updated, 'dislikes');
+        localStorage.setItem(articleId, 'disliked');
         if (
           Array.from(document.querySelector('.li').classList).includes(
             'li--active'
           )
         ) {
-          updated = await updateLike('likes', -1);
+          updated = counterLike.dataset.count * 1 - 1;
           likeFormattor(updated, 'likes');
           document.querySelector('.li').classList.remove('li--active');
+          updated = await updateLike('likes', -1);
         }
         updated = await updateLike('dislikes', 1);
-        likeFormattor(updated, 'dislikes');
-        localStorage.setItem(articleId, 'disliked');
       } else {
-        updated = await updateLike('dislikes', -1);
+        updated = counterDislike.dataset.count * 1 - 1;
         likeFormattor(updated, 'dislikes');
         localStorage.removeItem(articleId);
+        updated = await updateLike('dislikes', -1);
       }
+    }
+  });
+}
+
+if (loginForm) {
+  loginForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    let res;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+      res = await axios({
+        method: 'post',
+        url: '/api/v1/admin/login',
+        data: {
+          email,
+          password,
+        },
+        onUploadProgress: function (progressEvent) {
+          let loaded = Math.floor(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          loaded -= 10;
+          document.querySelector('.loading').style.width = `${loaded}%`;
+        },
+      });
+      if (res) {
+        document.querySelector('.loading').style.width = `100%`;
+        setTimeout(() => {
+          document.querySelector('.loading').style.opacity = '0';
+        }, 1000);
+        setTimeout(() => {
+          document.querySelector('.loading').style.width = `0%`;
+          document.querySelector('.loading').style.opacity = '1';
+        }, 100);
+        sendAlert('success', res.data.message);
+        setTimeout(() => {
+          location.assign('/', true);
+        }, 4000);
+      }
+    } catch (err) {
+      document.querySelector('.loading').style.width = `100%`;
+      setTimeout(() => {
+        document.querySelector('.loading').style.opacity = '0';
+      }, 2000);
+      setTimeout(() => {
+        document.querySelector('.loading').style.width = `0%`;
+        document.querySelector('.loading').style.opacity = '1';
+      }, 100);
+      sendAlert('fail', err.response.data.message);
     }
   });
 }

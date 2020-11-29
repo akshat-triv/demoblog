@@ -39,17 +39,23 @@ https://www.facebook.com/sharer.php?u=https://akshattrivedi.tk/article/${article
                         h1 I'm a placeholder
                 .wall__subs-article
                     .wall__subs-article__stories
+                        .overview(style="width:100%;margin-bottom:5rem;")
+                            p.paragraph= `{Get notified when a new article is posted &#128276; }`
+                            form#notify
+                                input.name#notify-name(type="text" placeholder="Your name" required)
+                                input.name#notify-email(type="text" placeholder="Your email" required)
+                                button.submit-btn(type='submit') submit
                         each article,i in related
                             +story(article)
                     .wall__subs-article__like
                         p.paragraph Give a thumbs up, if you liked the article.
                         .like
-                            a#liked.like-1(href='#')
-                                svg.icons.like__icon.li
+                            a#liked.like-1.li(href='#')
+                                svg.icons.like__icon
                                     use(xlink:href='/svg/sprite.svg#icon-thumbs-up')
                                 .like__counter(id='counterLike' data-count=article.likes)
-                            a#disliked.like-2(href='#')
-                                svg.icons.like__icon.di
+                            a#disliked.like-2.di(href='#')
+                                svg.icons.like__icon
                                     use(xlink:href='/svg/sprite.svg#icon-thumbs-down')
                                 .like__counter(id='counterDislike' data-count=article.dislikes)
         .row
@@ -57,7 +63,7 @@ https://www.facebook.com/sharer.php?u=https://akshattrivedi.tk/article/${article
                 form#comments__add.comments__add(action='#')
                     span Add a comment
                     input#name.name(type='text' name='name' placeholder='Name' required)
-                    textarea#comment.comment(form='comments__add' name='comment' placeholder='Comment' style='margin-bottom: 1rem;' required)
+                    textarea#comment.comment(form='comments__add' name='comment' placeholder='Comment' style='margin-bottom: 2rem;' required)
                     button.submit-btn(type='submit') submit
                 .comments__present
                     span(id='commentsAfter') Comments

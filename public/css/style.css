@@ -43,6 +43,12 @@ html {
   html {
     font-size: 50%;
   }
+  .overview__item:link,
+  .overview__item:active,
+  .overview__item:visited,
+  .overview__item:hover {
+    font-size: 2rem !important;
+  }
 }
 @media only screen and (max-width: 37.5em) {
   html {
@@ -175,6 +181,10 @@ h1 {
   margin-bottom: 3rem;
 }
 
+#dummy a:hover {
+  cursor: unset !important;
+}
+
 .paragraph span {
   font-weight: 600;
   color: #111;
@@ -225,6 +235,14 @@ h1 {
   border: none;
   outline: none;
   background-color: var(--Light-grey-3);
+}
+
+.form__label {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #333;
 }
 .search__button:hover {
   cursor: pointer;
@@ -294,7 +312,7 @@ h1 {
 }
 
 .alert {
-  position: absolute;
+  position: fixed;
   top: 10%;
   max-width: 90%;
   left: 50%;
@@ -304,7 +322,8 @@ h1 {
   transform: translate(-50%, -50%);
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1);
   z-index: 10000;
-  animation: alerts 1s ease-in-out;
+  animation: alerts 10s ease-in;
+  /*transition: all 0.2s;*/
 }
 
 .icons {
@@ -328,17 +347,21 @@ h1 {
 }
 
 .alert--success {
-  background-color: rgba(12, 134, 248, 0.8);
+  background-color: rgba(12, 134, 248, 1);
 }
 
 .alert--fail {
-  background-color: rgba(255, 27, 27, 0.8);
+  background-color: rgba(255, 27, 27, 1);
 }
 
 @keyframes alerts {
   0% {
     opacity: 0;
     transform: translate(-50%, -50rem);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
   }
 
   90% {
@@ -489,7 +512,23 @@ h1 {
   display: inline-block;
 }
 
-.li--active {
+.loading {
+  position: fixed;
+  top: 0;
+  z-index: 20000;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-image: linear-gradient(
+    to right,
+    #3489db 50%,
+    #1988f0 50%,
+    #6db8ff 90%
+  );
+  transition: all 0.1s;
+}
+
+.li--active svg {
   fill: var(--Primary-color);
 }
 
@@ -511,11 +550,24 @@ h1 {
   border-radius: 5px;
   margin-bottom: 2rem;
 }
+
+.form {
+  height: 300px;
+}
+
+.description__text {
+  float: right;
+}
 @media only screen and (max-width: 56.25em) {
   .name,
   .comment {
     height: 6rem;
     font-size: 2rem;
+  }
+  .submit-btn {
+    font-size: 2rem !important;
+    width: 12rem !important;
+    padding: 1rem !important;
   }
 }
 .comment {
@@ -530,8 +582,8 @@ h1 {
   background-color: transparent;
   border-bottom: 2px solid #25ccf7;
   padding: 3px;
-  width: 10rem;
   font-size: 1.6rem;
+  width: 10rem;
   transition: all 0.2s;
   outline: none;
   margin-bottom: 2rem;
@@ -752,6 +804,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
   font-size: 1.8rem;
 }
 @media only screen and (max-width: 56.25em) {
@@ -829,6 +882,7 @@ main {
 @media only screen and (max-width: 56.25em) {
   .comments__present {
     font-size: 2.3rem;
+    max-height: 100rem;
   }
 }
 .comments__present::-webkit-scrollbar {
