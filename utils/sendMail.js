@@ -25,25 +25,14 @@ class sendEmail {
       });
     } else {
       transport = nodemailer.createTransport({
-        service: 'Google',
+        service: 'Gmail',
         auth: {
-          user: '',
-          pass: '',
+          user: process.env.GMAIL,
+          pass: process.env.GMAIL_PASS,
         },
       });
     }
     return transport;
-  }
-
-  createMail() {
-    const mail = {
-      to: this.to,
-      from: this.from,
-      subject: this.subject,
-      text: this.message,
-    };
-
-    return mail;
   }
 
   async send(template) {
