@@ -34,6 +34,13 @@ exports.getPostArticle = catchAsync(async (req, res, next) => {
   res.status(200).render('postArticle');
 });
 
+exports.getRemoved = catchAsync(async (req, res, next) => {
+  res.status(200).render('error', {
+    title: 'Good Bye',
+    msg: 'You unsubscribed from my blog',
+  });
+});
+
 async function getRelated(searchString) {
   const articles = await Article.find(
     { $text: { $search: searchString } },

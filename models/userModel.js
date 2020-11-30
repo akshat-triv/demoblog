@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'User must provide his name'],
   },
+  user_id: {
+    type: String,
+    required: [true, 'A user must have a user id'],
+  },
 });
 
 const User = mongoose.model('User', userSchema);

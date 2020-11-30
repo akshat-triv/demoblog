@@ -6,10 +6,11 @@ class sendEmail {
   constructor(to, subject, message, link) {
     this.to = to.email;
     this.firstName = to.name.split(' ')[0];
+    this.user_id = to.id;
     this.subject = subject;
     this.message = message;
     this.link = link;
-    this.from = 'Akshat Trivedi';
+    this.from = '"Akshat Trivedi" <akshattrivedi.blog@gmail.com>';
   }
 
   createTransporter() {
@@ -42,6 +43,7 @@ class sendEmail {
         firstName: this.firstName,
         url: this.link,
         subject: this.subject,
+        user_id: this.user_id,
       }
     );
 
